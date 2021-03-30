@@ -14,12 +14,10 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddIcon from "@material-ui/icons/Add";
 import SidebarOption from "./SidebarOption";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { auth, db } from "../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { db } from "../firebase";
 
 function Sidebar() {
   const [channels] = useCollection(db.collection("rooms"));
-  const [user] = useAuthState(auth);
 
   return (
     <SidebarContainer>
@@ -63,6 +61,19 @@ const SidebarContainer = styled.div`
   border-top: 1px solid #49274b;
   max-width: 260px;
   margin-top: 60px;
+  overflow-y: scroll;
+  display: block;
+  top: 0;
+  bottom: 0;
+
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(114, 7, 96, 0.103);
+    border-radius: 10px;
+  }
 
   > hr {
     margin-top: 10px;
